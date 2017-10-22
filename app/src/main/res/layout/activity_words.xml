@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/wordet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <Button
+        android:id="@+id/wordBut3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click the button below to add words from a website"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/wordtv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Want to add more words?"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/wordBut4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/wordBut5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -53,6 +53,17 @@ public class MainMenu extends Fragment implements View.OnClickListener {
                     .replace(R.id.fragments, fragment)
                     .addToBackStack(null)
                     .commit();
+        } else if (v == settingsBut) {
+
+            Settings fragment = new Settings(logic);
+            Bundle arguments = new Bundle();
+            fragment.setArguments(arguments);
+
+            getFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                    .replace(R.id.fragments, fragment)
+                    .addToBackStack(null)
+                    .commit();
+
 
         } else if (v == helpBut) {
 

@@ -161,7 +161,7 @@ public class Galgelogik {
 
 
   public void hentOrdFraDr() throws Exception {
-    String data = hentUrl("http://dr.dk");
+    String data = hentUrl("https://www.dr.dk/");
     System.out.println("data = " + data);
 
     data = data.substring(data.indexOf("<body")). // fjern headere
@@ -176,4 +176,12 @@ public class Galgelogik {
 
     System.out.println("muligeOrd = " + muligeOrd);
     nulstil();
-  }}
+  }
+
+  public void tilføjOrd(String ord) {
+
+    muligeOrd.add(ord);
+
+  }
+
+}

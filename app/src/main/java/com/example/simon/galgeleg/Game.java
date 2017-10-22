@@ -20,7 +20,6 @@ import com.example.simon.galgeleg.Logic.Galgelogik;
 
 public class Game extends Fragment implements View.OnClickListener {
 
-    private TextView info;
     private Button gameBut;
     private Button yesBut;
     private Button noBut;
@@ -28,9 +27,8 @@ public class Game extends Fragment implements View.OnClickListener {
     private Galgelogik logic;
     private ImageView gameiv;
     private TextView gametv;
-    private int counter;
-    private Image img;
     private Integer[] imageIDs = {
+            R.drawable.galge,
             R.drawable.forkert1,
             R.drawable.forkert2,
             R.drawable.forkert3,
@@ -105,26 +103,34 @@ public class Game extends Fragment implements View.OnClickListener {
 
         gametv.setText("Guess the word: " + logic.getSynligtOrd());
         if (logic.erSidsteBogstavKorrekt() == true) {
+
             gametv.append("\n\nYou have " + logic.getAntalForkerteBogstaver() + " wrong:" + logic.getBrugteBogstaver());
+
         } else if (logic.erSidsteBogstavKorrekt() == false) {
+
             gametv.append("\n\nYou have " + logic.getAntalForkerteBogstaver() + " wrong:" + logic.getBrugteBogstaver());
-            gameiv.setImageResource(imageIDs[counter]);
-            counter++;
+
+            gameiv.setImageResource(imageIDs[logic.getAntalForkerteBogstaver()]);
+
         }
 
         if (logic.erSpilletVundet()) {
+
             gametv.append("\nYou win!");
+
             endGame();
+
         }
         if (logic.erSpilletTabt()) {
+
             gametv.setText("You have lost. The word was : " + logic.getOrdet());
+
             endGame();
         }
     }
 
     private void startGame() {
         logic.nulstil();
-        counter = 0;
 
         gametv.setText("Welcome to hangman!." +
                 "\nThis is the word you have to guess: "+logic.getSynligtOrd() +
@@ -133,7 +139,7 @@ public class Game extends Fragment implements View.OnClickListener {
 
         et.setHint("Write your letter here.");
 
-        gameiv.setImageResource(R.drawable.galge);
+        gameiv.setImageResource(imageIDs[logic.getAntalForkerteBogstaver()]);
 
         gameBut.setVisibility(View.VISIBLE);
         et.setVisibility(View.VISIBLE);
@@ -142,10 +148,13 @@ public class Game extends Fragment implements View.OnClickListener {
     }
 
     private void endGame() {
+
         gameBut.setVisibility(View.GONE);
         et.setVisibility(View.GONE);
         yesBut.setVisibility(View.VISIBLE);
         noBut.setVisibility(View.VISIBLE);
+
         gametv.append("\nWant to play again?");
+
     }
 }
