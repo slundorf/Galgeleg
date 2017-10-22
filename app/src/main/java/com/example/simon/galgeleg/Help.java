@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 /**
  * Created by Simon on 20-10-2017.
@@ -13,19 +15,23 @@ import android.webkit.WebView;
 
 public class Help extends Fragment {
 
+    private WebView wv;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View source = inflater.inflate(R.layout.activity_help, container, false);
 
+       wv = (WebView) source.findViewById(R.id.wv);
+        String help = "https://en.wikipedia.org/wiki/Hangman_(game)";
+        WebSettings webSettings = wv.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
+        wv.setWebViewClient(new WebViewClient());
 
-        String help = "<html><body>"
-                + "<h1>Hj&aelig;lpesk&aelig;rm</h1>"
-                + "<p>Her kunne st&aring; noget hj&aelig;lp.<br>Men den er ikke skrevet endnu.</p>";
+        wv.loadUrl(help);
 
-        WebView wv = new WebView(getActivity());
-        wv.loadData(help, "text/html", null);
-        return wv;
+        return source;
     }
 }
+

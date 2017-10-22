@@ -121,7 +121,6 @@ public class Galgelogik {
 
     if (ordet.equals(ord)) {
       sidsteBogstavVarKorrekt = true;
-      System.out.println("DETTE ER EN TEST!");
       spilletErVundet = true;
       synligtOrd = ordet;
       return;

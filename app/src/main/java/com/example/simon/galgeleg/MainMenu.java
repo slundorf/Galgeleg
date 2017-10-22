@@ -49,10 +49,20 @@ public class MainMenu extends Fragment implements View.OnClickListener {
             fragment.setArguments(arguments);
 
             getFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                     .replace(R.id.fragments, fragment)
                     .addToBackStack(null)
                     .commit();
 
-        }
+        } else if (v == helpBut) {
+
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.fragments, new Help())
+                .addToBackStack(null)
+                .commit();
+
+    }
+
     }
 }
