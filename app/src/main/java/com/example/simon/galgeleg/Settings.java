@@ -19,6 +19,7 @@ import com.example.simon.galgeleg.Logic.Galgelogik;
 
 public class Settings extends Fragment implements View.OnClickListener {
     private TextView info;
+    private Button wordBut;
     private Button wordBut2;
     private EditText et;
     private Galgelogik logic;
@@ -33,8 +34,10 @@ public class Settings extends Fragment implements View.OnClickListener {
 
         View source = inflater.inflate(R.layout.activity_settings, container, false);
 
+        wordBut = (Button) source.findViewById(R.id.wordBut);
         wordBut2 = (Button) source.findViewById(R.id.wordBut2);
 
+        wordBut.setOnClickListener(this);
         wordBut2.setOnClickListener(this);
 
         return source;
@@ -43,7 +46,15 @@ public class Settings extends Fragment implements View.OnClickListener {
 
     public void onClick(View v) {
 
-        if (v == wordBut2) {
+        if (v == wordBut) {
+
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                    .replace(R.id.fragments, new WordList(logic))
+                    .addToBackStack(null)
+                    .commit();
+
+        } else if (v == wordBut2) {
 
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
@@ -52,6 +63,5 @@ public class Settings extends Fragment implements View.OnClickListener {
                     .commit();
 
         }
-
     }
 }

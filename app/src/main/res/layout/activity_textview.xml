@@ -3,16 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/wordBut2"
+    <TextView
+        android:id="@+id/wordtv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Words" />
-
-    <Button
-        android:id="@+id/wordBut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="List of Words" />
-
+        android:text="TextView" />
 </LinearLayout>

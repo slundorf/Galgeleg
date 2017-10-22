@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.simon.galgeleg.Logic.Galgelogik;
 
+import java.util.ArrayList;
+
 /**
  * Created by Simon on 22-10-2017.
  */
@@ -61,10 +63,20 @@ public class AddWords extends Fragment implements View.OnClickListener {
         if (v == wordBut3) {
 
             String word = wordet.getText().toString();
+            ArrayList<String> possibleWords = logic.getMuligeOrd();
 
-            logic.tilføjOrd(word);
+            for(int i = 0; i<possibleWords.size(); i++) {
+                if (word.equals(possibleWords.get(i).toString())) {
 
-            updateScreen();
+                    wordet.setError(word + " is already in the game");
+
+                    return;
+                }
+            }
+
+                logic.tilføjOrd(word);
+
+                updateScreen();
 
         } else if (v == wordBut4) {
 
