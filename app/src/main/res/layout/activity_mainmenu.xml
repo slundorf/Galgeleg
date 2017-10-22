@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.simon.galgeleg.MainMenu">
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="139dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Help"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="211dp" />
+    tools:context="com.example.simon.galgeleg.MainMenu"
+    android:orientation="vertical"
+    android:layout_weight="1">
 
     <Button
         android:id="@+id/button"
@@ -28,6 +14,30 @@
         android:layout_height="wrap_content"
         android:text="Play Hangman"
         tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="59dp" />
+        tools:layout_editor_absoluteY="59dp"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="139dp"
+        android:layout_above="@+id/button3"
+        android:layout_alignStart="@+id/button3"
+        android:layout_marginBottom="37dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Help"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="211dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

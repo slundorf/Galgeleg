@@ -15,7 +15,7 @@ public class Main_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainmenu);
+        setContentView(R.layout.frame_layout);
 
         if (savedInstanceState == null) {
             Fragment fragment = new Welcome();

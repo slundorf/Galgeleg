@@ -83,7 +83,7 @@ public class Galgelogik {
       if (brugteBogstaver.contains(bogstav)) {
         synligtOrd = synligtOrd + bogstav;
       } else {
-        synligtOrd = synligtOrd + "*";
+        synligtOrd = synligtOrd + " _";
         spilletErVundet = false;
       }
     }
@@ -105,7 +105,32 @@ public class Galgelogik {
       sidsteBogstavVarKorrekt = false;
       System.out.println("Bogstavet var IKKE korrekt: " + bogstav);
       antalForkerteBogstaver = antalForkerteBogstaver + 1;
-      if (antalForkerteBogstaver > 6) {
+      if (antalForkerteBogstaver == 6) {
+        spilletErTabt = true;
+      }
+    }
+    opdaterSynligtOrd();
+  }
+
+  public void gætOrd(String ord) {
+    System.out.println("Der gættes på ordet: " + ord);
+    if (brugteBogstaver.contains(ord)) return;
+    if (spilletErVundet || spilletErTabt) return;
+
+    brugteBogstaver.add(ord);
+
+    if (ordet.equals(ord)) {
+      sidsteBogstavVarKorrekt = true;
+      System.out.println("DETTE ER EN TEST!");
+      spilletErVundet = true;
+      synligtOrd = ordet;
+      return;
+    } else {
+      // Forkerte ord
+      sidsteBogstavVarKorrekt = false;
+      System.out.println("Ordet var IKKE korrekt: " + ord);
+      antalForkerteBogstaver = antalForkerteBogstaver + 1;
+      if (antalForkerteBogstaver == 6) {
         spilletErTabt = true;
       }
     }
