@@ -13,19 +13,16 @@ import com.example.simon.galgeleg.Logic.Galgelogik;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import static com.example.simon.galgeleg.MainMenu.logic;
+
 /**
  * Created by Simon on 22-10-2017.
  */
 
 public class WordList extends Fragment implements View.OnClickListener {
 
-    private Galgelogik logic;
     private ListView lv;
     private ArrayList<String> possibleWords;
-
-    public WordList(Galgelogik l) {
-        logic = l;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

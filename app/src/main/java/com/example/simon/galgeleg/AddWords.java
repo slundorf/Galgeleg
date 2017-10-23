@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.example.simon.galgeleg.Logic.Galgelogik;
-
 import java.util.ArrayList;
+import static com.example.simon.galgeleg.MainMenu.logic;
 
 /**
  * Created by Simon on 22-10-2017.
@@ -20,17 +18,13 @@ import java.util.ArrayList;
 public class AddWords extends Fragment implements View.OnClickListener {
 
     private EditText wordet;
+    private EditText webet;
     private Button wordBut3;
     private Button wordBut4;
     private Button wordBut5;
+    private Button webBut;
     private TextView wordtv;
-    private Galgelogik logic;
-
-    public AddWords(Galgelogik l) {
-
-        logic = l;
-
-    }
+    private String url;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,19 +33,26 @@ public class AddWords extends Fragment implements View.OnClickListener {
 
         wordet = (EditText) source.findViewById(R.id.wordet);
 
+        webet = (EditText) source.findViewById(R.id.webet);
+
         wordBut3 = (Button) source.findViewById(R.id.wordBut3);
 
         wordBut4 = (Button) source.findViewById(R.id.wordBut4);
 
         wordBut5 = (Button) source.findViewById(R.id.wordBut5);
 
+        webBut = (Button) source.findViewById(R.id.webBut);
+
         wordtv = (TextView) source.findViewById(R.id.wordtv);
 
         wordet.setHint("Enter the word you wish to add");
 
+        webet.setHint("Enter website you want to add words from");
+
         wordBut3.setOnClickListener(this);
         wordBut4.setOnClickListener(this);
         wordBut5.setOnClickListener(this);
+        webBut.setOnClickListener(this);
 
         return source;
 
@@ -82,17 +83,42 @@ public class AddWords extends Fragment implements View.OnClickListener {
 
             wordBut3.setVisibility(View.VISIBLE);
             wordet.setVisibility(View.VISIBLE);
+            webet.setVisibility(View.VISIBLE);
+            webBut.setVisibility(View.VISIBLE);
             wordtv.setVisibility(View.GONE);
             wordBut4.setVisibility(View.GONE);
             wordBut5.setVisibility(View.GONE);
 
         } else if (v == wordBut5) {
 
-            getFragmentManager().beginTransaction()
-                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    .replace(R.id.fragments, new AddWords(logic))
-                    .addToBackStack(null)
-                    .commit();
+            getFragmentManager().popBackStackImmediate();
+
+        } else if (v == webBut) {
+
+            url = webet.getText().toString();
+
+           // if ()
+
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        while(true) {
+                            sleep(1000);
+                            logic.hentOrdFraHjemmeside(url);
+                            return;
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            thread.start();
+
+            updateScreen();
 
         }
 
@@ -102,9 +128,12 @@ public class AddWords extends Fragment implements View.OnClickListener {
 
         wordBut3.setVisibility(View.GONE);
         wordet.setVisibility(View.GONE);
+        webBut.setVisibility(View.GONE);
+        webet.setVisibility(View.GONE);
         wordBut4.setVisibility(View.VISIBLE);
         wordBut5.setVisibility(View.VISIBLE);
         wordtv.setVisibility(View.VISIBLE);
+
 
     }
 

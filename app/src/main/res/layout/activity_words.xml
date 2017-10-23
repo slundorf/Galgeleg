@@ -19,7 +19,20 @@
         android:id="@+id/wordBut3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter" />
+        android:text="Add word" />
+
+    <EditText
+        android:id="@+id/webet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/webBut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add words from website" />
 
     <TextView
         android:id="@+id/textView3"

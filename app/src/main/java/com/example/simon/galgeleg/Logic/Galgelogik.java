@@ -1,7 +1,10 @@
 package com.example.simon.galgeleg.Logic;
 
+import android.graphics.Path;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -166,8 +169,8 @@ public class Galgelogik {
   }
 
 
-  public void hentOrdFraDr() throws Exception {
-    String data = hentUrl("https://www.dr.dk/");
+  public void hentOrdFraHjemmeside(String url) throws Exception {
+    String data = hentUrl(url);
     System.out.println("data = " + data);
 
     data = data.substring(data.indexOf("<body")). // fjern headere
@@ -189,5 +192,13 @@ public class Galgelogik {
     muligeOrd.add(ord);
 
   }
+
+ // public String LoadData() {
+
+   // Path file =
+
+
+ // }
+
 
 }

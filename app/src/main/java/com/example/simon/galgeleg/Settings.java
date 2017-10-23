@@ -1,32 +1,22 @@
 package com.example.simon.galgeleg;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TableLayout;
 import android.widget.TextView;
-
-import com.example.simon.galgeleg.Logic.Galgelogik;
 
 /**
  * Created by Simon on 20-10-2017.
  */
 
 public class Settings extends Fragment implements View.OnClickListener {
-    private TextView info;
     private Button wordBut;
     private Button wordBut2;
-    private EditText et;
-    private Galgelogik logic;
-
-    public Settings(Galgelogik l) {
-        logic = l;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +40,7 @@ public class Settings extends Fragment implements View.OnClickListener {
 
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    .replace(R.id.fragments, new WordList(logic))
+                    .replace(R.id.fragments, new WordList())
                     .addToBackStack(null)
                     .commit();
 
@@ -58,7 +48,7 @@ public class Settings extends Fragment implements View.OnClickListener {
 
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    .replace(R.id.fragments, new AddWords(logic))
+                    .replace(R.id.fragments, new AddWords())
                     .addToBackStack(null)
                     .commit();
 

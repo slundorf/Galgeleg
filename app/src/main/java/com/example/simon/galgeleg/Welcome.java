@@ -25,9 +25,7 @@ public class Welcome extends Fragment implements Runnable {
         Log.d("Welcome", "the fragment was shown!");
 
         ImageView iv = new ImageView(getActivity());
-      //  tv1 = (TextView) iv.findViewById(R.id.tv1);
-       // tv1.setText("Welcome to Hangman!");
-        iv.setImageResource(R.drawable.logo);
+        iv.setImageResource(R.drawable.forkert6);
         iv.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.intro_anim));
 
         if (savedInstanceState == null) {

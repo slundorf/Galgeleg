@@ -1,6 +1,5 @@
 package com.example.simon.galgeleg;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,8 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.simon.galgeleg.Logic.Galgelogik;
+import static com.example.simon.galgeleg.MainMenu.logic;
 
 /**
  * Created by Simon on 20-10-2017.
@@ -24,7 +22,6 @@ public class Game extends Fragment implements View.OnClickListener {
     private Button yesBut;
     private Button noBut;
     private EditText et;
-    private Galgelogik logic;
     private ImageView gameiv;
     private TextView gametv;
     private Integer[] imageIDs = {
@@ -36,10 +33,6 @@ public class Game extends Fragment implements View.OnClickListener {
             R.drawable.forkert5,
             R.drawable.forkert6,
     };
-
-    public Game(Galgelogik l) {
-    logic = l;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,11 +82,9 @@ public class Game extends Fragment implements View.OnClickListener {
         }
 
         if (v == noBut) {
-            Fragment fragment = new MainMenu();
-            getFragmentManager().beginTransaction()
-                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    .replace(R.id.fragments, fragment)
-                    .commit();
+
+            getFragmentManager().popBackStackImmediate();
+
         }
 
     }
@@ -135,7 +126,6 @@ public class Game extends Fragment implements View.OnClickListener {
         gametv.setText("Welcome to hangman!." +
                 "\nThis is the word you have to guess: "+logic.getSynligtOrd() +
                 "\nWrite the letter or word you wish to guess on underneath and hit 'Guess'.\n");
-
 
         et.setHint("Write your letter here.");
 

@@ -10,6 +10,12 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
+    <ImageView
+        android:id="@+id/gameiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/galge" />
+
     <EditText
         android:id="@+id/et"
         android:layout_width="match_parent"
@@ -22,12 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guess" />
-
-    <ImageView
-        android:id="@+id/gameiv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/galge" />
 
     <Button
         android:id="@+id/button5"
@@ -42,4 +42,5 @@
         android:layout_height="wrap_content"
         android:text="No"
         android:visibility="gone" />
+
 </LinearLayout>
