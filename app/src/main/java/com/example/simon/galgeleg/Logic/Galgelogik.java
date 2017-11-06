@@ -17,6 +17,7 @@ public class Galgelogik {
   private String ordet;
   private ArrayList<String> brugteBogstaver = new ArrayList<String>();
   private String synligtOrd;
+  private int guesses;
   private int antalForkerteBogstaver;
   private boolean sidsteBogstavVarKorrekt;
   private boolean spilletErVundet;
@@ -41,6 +42,10 @@ public class Galgelogik {
 
   }
 
+  public int getGuesses() {
+    return guesses;
+  }
+
   public int getAntalForkerteBogstaver() {
     return antalForkerteBogstaver;
   }
@@ -63,6 +68,7 @@ public class Galgelogik {
 
 
   public Galgelogik() {
+    guesses = 0;
     muligeOrd.add("bil");
     muligeOrd.add("computer");
     muligeOrd.add("programmering");
@@ -76,6 +82,7 @@ public class Galgelogik {
 
   public void nulstil() {
     brugteBogstaver.clear();
+    guesses = 0;
     antalForkerteBogstaver = 0;
     spilletErVundet = false;
     spilletErTabt = false;
@@ -104,6 +111,8 @@ public class Galgelogik {
     if (brugteBogstaver.contains(bogstav)) return;
     if (spilletErVundet || spilletErTabt) return;
 
+    guesses++;
+
     brugteBogstaver.add(bogstav);
 
     if (ordet.contains(bogstav)) {
@@ -125,6 +134,8 @@ public class Galgelogik {
     System.out.println("Der gættes på ordet: " + ord);
     if (brugteBogstaver.contains(ord)) return;
     if (spilletErVundet || spilletErTabt) return;
+
+    guesses++;
 
     brugteBogstaver.add(ord);
 
@@ -168,29 +179,35 @@ public class Galgelogik {
     return sb.toString();
   }
 
+  public void tilføjOrd(String ord) {
+
+    muligeOrd.add(ord);
+
+  }
 
   public void hentOrdFraHjemmeside(String url) throws Exception {
     String data = hentUrl(url);
-    System.out.println("data = " + data);
+    //System.out.println("data = " + data);
 
     data = data.substring(data.indexOf("<body")). // fjern headere
             replaceAll("<.+?>", " ").toLowerCase(). // fjern tags
+            replaceAll("&#198;", "æ"). // erstat HTML-tegn
+            replaceAll("&#230;", "æ"). // erstat HTML-tegn
+            replaceAll("&#216;", "ø"). // erstat HTML-tegn
+            replaceAll("&#248;", "ø"). // erstat HTML-tegn
+            replaceAll("&oslash;", "ø"). // erstat HTML-tegn
+            replaceAll("&#229;", "å"). // erstat HTML-tegn
             replaceAll("[^a-zæøå]", " "). // fjern tegn der ikke er bogstaver
             replaceAll(" [a-zæøå] "," "). // fjern 1-bogstavsord
             replaceAll(" [a-zæøå][a-zæøå] "," "); // fjern 2-bogstavsord
 
     System.out.println("data = " + data);
+    System.out.println("data = " + Arrays.asList(data.split("\\s+")));
     muligeOrd.clear();
     muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
     System.out.println("muligeOrd = " + muligeOrd);
     nulstil();
-  }
-
-  public void tilføjOrd(String ord) {
-
-    muligeOrd.add(ord);
-
   }
 
  // public String LoadData() {

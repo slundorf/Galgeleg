@@ -29,18 +29,4 @@
         android:layout_height="wrap_content"
         android:text="Guess" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Yes"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No"
-        android:visibility="gone" />
-
 </LinearLayout>

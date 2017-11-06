@@ -19,12 +19,10 @@ import static com.example.simon.galgeleg.MainMenu.logic;
 public class Game extends Fragment implements View.OnClickListener {
 
     private Button gameBut;
-    private Button yesBut;
-    private Button noBut;
     private EditText et;
     private ImageView gameiv;
     private TextView gametv;
-    private Integer[] imageIDs = {
+    static Integer[] imageIDs = {
             R.drawable.galge,
             R.drawable.forkert1,
             R.drawable.forkert2,
@@ -41,8 +39,6 @@ public class Game extends Fragment implements View.OnClickListener {
         View source = inflater.inflate(R.layout.activity_game, container, false);
 
         gameBut = (Button) source.findViewById(R.id.button4);
-        yesBut = (Button) source.findViewById(R.id.button5);
-        noBut = (Button) source.findViewById(R.id.button6);
         gametv = (TextView) source.findViewById(R.id.gametv);
         gameiv = (ImageView) source.findViewById(R.id.gameiv);
         et = (EditText) source.findViewById(R.id.et);
@@ -50,8 +46,6 @@ public class Game extends Fragment implements View.OnClickListener {
         startGame();
 
         gameBut.setOnClickListener(this);
-        yesBut.setOnClickListener(this);
-        noBut.setOnClickListener(this);
 
         return source;
     }
@@ -75,16 +69,6 @@ public class Game extends Fragment implements View.OnClickListener {
                 et.setError(null);
                 updateScreen();
             }
-        }
-
-        if (v == yesBut) {
-            startGame();
-        }
-
-        if (v == noBut) {
-
-            getFragmentManager().popBackStackImmediate();
-
         }
 
     }
@@ -120,7 +104,7 @@ public class Game extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void startGame() {
+    public void startGame() {
         logic.nulstil();
 
         gametv.setText("Welcome to hangman!." +
@@ -131,20 +115,18 @@ public class Game extends Fragment implements View.OnClickListener {
 
         gameiv.setImageResource(imageIDs[logic.getAntalForkerteBogstaver()]);
 
-        gameBut.setVisibility(View.VISIBLE);
-        et.setVisibility(View.VISIBLE);
-        yesBut.setVisibility(View.GONE);
-        noBut.setVisibility(View.GONE);
     }
 
     private void endGame() {
 
-        gameBut.setVisibility(View.GONE);
-        et.setVisibility(View.GONE);
-        yesBut.setVisibility(View.VISIBLE);
-        noBut.setVisibility(View.VISIBLE);
+        EndGame fragment = new EndGame();
+        Bundle arguments = new Bundle();
+        fragment.setArguments(arguments);
 
-        gametv.append("\nWant to play again?");
+        getFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.fragments, fragment)
+                .addToBackStack(null)
+                .commit();
 
     }
 }

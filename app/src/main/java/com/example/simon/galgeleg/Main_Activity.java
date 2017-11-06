@@ -11,6 +11,7 @@ import android.view.Window;
  */
 
 public class Main_Activity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
