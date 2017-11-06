@@ -1,5 +1,6 @@
 package com.example.simon.galgeleg;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
+
 import static com.example.simon.galgeleg.MainMenu.logic;
 
 /**
@@ -25,11 +29,17 @@ public class AddWords extends Fragment implements View.OnClickListener {
     private Button webBut;
     private TextView wordtv;
     private String url;
+    Toast download;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     View source = inflater.inflate(R.layout.activity_words, container, false);
+
+        CharSequence text = "Words downloading";
+        int duration = Toast.LENGTH_SHORT;
+
+        download = Toast.makeText(getContext(), text, duration);
 
         wordet = (EditText) source.findViewById(R.id.wordet);
 
@@ -117,6 +127,8 @@ public class AddWords extends Fragment implements View.OnClickListener {
             };
 
             thread.start();
+
+            download.show();
 
             updateScreen();
 
