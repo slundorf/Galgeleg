@@ -14,6 +14,7 @@
         android:id="@+id/gameiv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:srcCompat="@drawable/galge" />
 
     <EditText
@@ -21,12 +22,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Write your letter here."
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/guessBut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guess" />
+        android:text="Guess"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/addBut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/randBut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/listBut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <ListView
+        android:id="@+id/gameList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </LinearLayout>

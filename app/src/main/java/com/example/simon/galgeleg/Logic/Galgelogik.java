@@ -66,6 +66,18 @@ public class Galgelogik {
     return spilletErTabt || spilletErVundet;
   }
 
+  public void setOrdet(String ord) {
+
+    ordet = ord;
+
+  }
+
+  public void deleteWord(int pos) {
+
+    muligeOrd.remove(pos);
+
+  }
+
 
   public Galgelogik() {
     guesses = 0;
@@ -181,6 +193,12 @@ public class Galgelogik {
 
   public void tilføjOrd(String ord) {
 
+    for (int i = 0; i<muligeOrd.size(); i++) {
+      if (muligeOrd.get(i).equals(ord)) {
+        return;
+      }
+    }
+
     muligeOrd.add(ord);
 
   }
@@ -203,7 +221,7 @@ public class Galgelogik {
 
     System.out.println("data = " + data);
     System.out.println("data = " + Arrays.asList(data.split("\\s+")));
-    muligeOrd.clear();
+ //   muligeOrd.clear();
     muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
     System.out.println("muligeOrd = " + muligeOrd);
