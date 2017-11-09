@@ -1,5 +1,6 @@
 package com.example.simon.galgeleg;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -36,6 +37,7 @@ public class Welcome extends Fragment implements Runnable {
     }
 
     public void run() {
+
         Fragment fragment = new MainMenu();
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)

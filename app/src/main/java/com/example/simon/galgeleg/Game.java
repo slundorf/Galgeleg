@@ -107,8 +107,7 @@ public class Game extends Fragment implements View.OnClickListener {
     public void startGame() {
         logic.nulstil();
 
-        gametv.setText("Welcome to hangman!." +
-                "\nThis is the word you have to guess: "+logic.getSynligtOrd() +
+        gametv.setText("This is the word you have to guess: \n"+logic.getSynligtOrd() +
                 "\nWrite the letter or word you wish to guess on underneath and hit 'Guess'.\n");
 
         et.setHint("Write your letter here.");

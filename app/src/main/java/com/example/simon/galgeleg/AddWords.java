@@ -114,7 +114,7 @@ public class AddWords extends Fragment implements View.OnClickListener {
                 public void run() {
                     try {
                         while(true) {
-                            sleep(1000);
+                //            sleep(1000);
                             logic.hentOrdFraHjemmeside(url);
                             return;
                         }
