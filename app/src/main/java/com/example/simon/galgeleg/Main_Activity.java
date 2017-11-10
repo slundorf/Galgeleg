@@ -27,9 +27,9 @@ public class Main_Activity extends AppCompatActivity {
                     .commit();
         }
 
-        setTitle("");
-        Drawable draw = getResources().getDrawable(R.drawable.hangmanlogo);
-        getSupportActionBar().setBackgroundDrawable(draw);
+        setTitle("Hangman");
+     //   Drawable draw = getResources().getDrawable(R.drawable.hangmanlogo);
+    //    getSupportActionBar().setBackgroundDrawable(draw);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
