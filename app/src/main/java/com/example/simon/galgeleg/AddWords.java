@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static com.example.simon.galgeleg.MainMenu.logic;
@@ -30,11 +31,14 @@ public class AddWords extends Fragment implements View.OnClickListener {
     private TextView wordtv;
     private String url;
     Toast download;
+    File files;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     View source = inflater.inflate(R.layout.activity_words, container, false);
+
+        files = getActivity().getFilesDir();
 
         CharSequence text = "Words downloading";
         int duration = Toast.LENGTH_SHORT;
@@ -86,6 +90,7 @@ public class AddWords extends Fragment implements View.OnClickListener {
             }
 
                 logic.tilføjOrd(word);
+                logic.saveWords(files);
 
                 updateScreen();
 
@@ -107,15 +112,13 @@ public class AddWords extends Fragment implements View.OnClickListener {
 
             url = webet.getText().toString();
 
-           // if ()
-
             Thread thread = new Thread() {
                 @Override
                 public void run() {
                     try {
                         while(true) {
-                //            sleep(1000);
                             logic.hentOrdFraHjemmeside(url);
+                            logic.saveWords(files);
                             return;
                         }
                     } catch (InterruptedException e) {

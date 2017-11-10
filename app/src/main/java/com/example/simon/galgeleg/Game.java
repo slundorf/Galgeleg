@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +22,7 @@ import static com.example.simon.galgeleg.MainMenu.logic;
  * Created by Simon on 20-10-2017.
  */
 
-public class Game extends Fragment implements View.OnClickListener {
+public class Game extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Button guessBut, addBut, randBut, listBut;
     private EditText et;
@@ -38,6 +39,7 @@ public class Game extends Fragment implements View.OnClickListener {
             R.drawable.forkert5,
             R.drawable.forkert6,
     };
+    private int counter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class Game extends Fragment implements View.OnClickListener {
         randBut.setOnClickListener(this);
         addBut.setOnClickListener(this);
         listBut.setOnClickListener(this);
+        glv.setOnItemClickListener(this);
 
         chooseWord();
 
@@ -99,12 +102,27 @@ public class Game extends Fragment implements View.OnClickListener {
             randBut.setVisibility(View.GONE);
             guessBut.setVisibility(View.GONE);
             gameiv.setVisibility(View.GONE);
+            et.setVisibility(View.GONE);
             glv.setVisibility(View.VISIBLE);
+            gametv.setText("Choose a word you wish you play with:");
 
 
         } else if (v == addBut) {
 
-            startGame(et.getText().toString());
+            String word = et.getText().toString();
+
+            if (word.length() == 0 && addBut.getText().equals("Play")) {
+                et.setError("Enter a word to continue!");
+            } else if (word.length() != 0) {
+                startGame(et.getText().toString());
+            } else if (word.length() == 0) {
+                addBut.setText("Play");
+                listBut.setVisibility(View.GONE);
+                randBut.setVisibility(View.GONE);
+                gametv.setVisibility(View.GONE);
+                et.setVisibility(View.VISIBLE);
+                et.setHint("Enter your word.");
+            }
 
         } else if (v == randBut) {
 
@@ -148,9 +166,8 @@ public class Game extends Fragment implements View.OnClickListener {
     public void chooseWord() {
 
         gametv.setText("Choose to play with a randomly chosen word, pick one from a list or write your own");
-        et.setHint("Write your word here");
         listBut.setText("Choose word from list");
-        addBut.setText("Play with word");
+        addBut.setText("Write a word to play with");
         randBut.setText("Play with random word");
 
     }
@@ -158,18 +175,22 @@ public class Game extends Fragment implements View.OnClickListener {
     public void startGame(String w) {
         logic.nulstil();
 
-        et.setHint("Write your letter here.");
-
         listBut.setVisibility(View.GONE);
         addBut.setVisibility(View.GONE);
         randBut.setVisibility(View.GONE);
+        glv.setVisibility(View.GONE);
+        gametv.setVisibility(View.VISIBLE);
         guessBut.setVisibility(View.VISIBLE);
         gameiv.setVisibility(View.VISIBLE);
+        et.setVisibility(View.VISIBLE);
+        et.setText("");
+        et.setHint("Write your letter here.");
 
         if (w != null) {
 
             et.setText("");
             logic.setOrdet(w);
+            logic.opdaterSynligtOrd();
 
         }
 
@@ -182,6 +203,8 @@ public class Game extends Fragment implements View.OnClickListener {
 
     private void endGame() {
 
+        et.setText("");
+
         EndGame fragment = new EndGame();
         Bundle arguments = new Bundle();
         fragment.setArguments(arguments);
@@ -190,6 +213,14 @@ public class Game extends Fragment implements View.OnClickListener {
                 .replace(R.id.fragments, fragment)
                 .addToBackStack(null)
                 .commit();
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        String word = possibleWords.get(position);
+        startGame(word);
 
     }
 }

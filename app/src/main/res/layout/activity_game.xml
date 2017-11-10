@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Write your letter here."
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/guessBut"

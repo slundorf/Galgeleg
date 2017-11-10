@@ -1,5 +1,6 @@
 package com.example.simon.galgeleg;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.simon.galgeleg.Logic.Galgelogik;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 

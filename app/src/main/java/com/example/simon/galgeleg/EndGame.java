@@ -67,9 +67,6 @@ public class EndGame extends Fragment implements View.OnClickListener {
 
         } else if (v == endBut2) {
 
-            Intent i = new Intent(getActivity(), MainMenu.class);
-            startActivity(i);
-
         }
 
     }

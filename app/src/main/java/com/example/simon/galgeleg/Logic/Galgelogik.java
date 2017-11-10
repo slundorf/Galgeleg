@@ -1,8 +1,13 @@
 package com.example.simon.galgeleg.Logic;
 
+import android.content.Context;
 import android.graphics.Path;
+import android.os.Environment;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -103,7 +108,7 @@ public class Galgelogik {
   }
 
 
-  private void opdaterSynligtOrd() {
+  public void opdaterSynligtOrd() {
     synligtOrd = "";
     spilletErVundet = true;
     for (int n = 0; n < ordet.length(); n++) {
@@ -228,12 +233,21 @@ public class Galgelogik {
     nulstil();
   }
 
- // public String LoadData() {
+  public void saveWords(File root) {
+    try {
+        File filepath = new File(root.toString(), "words.txt");
+        System.out.println(root.toString());
+        FileWriter writer = new FileWriter(filepath);
+        for (int i = 0; i < muligeOrd.size(); i++) {
+            writer.append(muligeOrd.get(i).toString());
+        }
+        writer.flush();
+        writer.close();
 
-   // Path file =
+        } catch (IOException e) {
+        e.printStackTrace();
+  }
 
-
- // }
-
+  }
 
 }
