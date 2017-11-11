@@ -233,9 +233,9 @@ public class Galgelogik {
     nulstil();
   }
 
-  public void saveWords(File root) {
+  public void saveWords(FileOutputStream root) {
     try {
-        File filepath = new File(root.toString(), "words.txt");
+        File filepath = new File(root.toString(), "detteerentest.txt");
         System.out.println(root.toString());
         FileWriter writer = new FileWriter(filepath);
         for (int i = 0; i < muligeOrd.size(); i++) {

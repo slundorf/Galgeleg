@@ -1,7 +1,9 @@
 package com.example.simon.galgeleg;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import static com.example.simon.galgeleg.MainMenu.logic;
+import static com.example.simon.galgeleg.Main_Activity.logic;
 
 /**
  * Created by Simon on 22-10-2017.
@@ -31,14 +35,14 @@ public class AddWords extends Fragment implements View.OnClickListener {
     private TextView wordtv;
     private String url;
     Toast download;
-    File files;
+    FileOutputStream files;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     View source = inflater.inflate(R.layout.activity_words, container, false);
 
-        files = getActivity().getFilesDir();
+     //   files = getActivity().getFilesDir();
 
         CharSequence text = "Words downloading";
         int duration = Toast.LENGTH_SHORT;
@@ -90,7 +94,7 @@ public class AddWords extends Fragment implements View.OnClickListener {
             }
 
                 logic.tilføjOrd(word);
-                logic.saveWords(files);
+                saveData();
 
                 updateScreen();
 
@@ -118,7 +122,7 @@ public class AddWords extends Fragment implements View.OnClickListener {
                     try {
                         while(true) {
                             logic.hentOrdFraHjemmeside(url);
-                            logic.saveWords(files);
+                            saveData();
                             return;
                         }
                     } catch (InterruptedException e) {
@@ -150,6 +154,19 @@ public class AddWords extends Fragment implements View.OnClickListener {
         wordtv.setVisibility(View.VISIBLE);
 
 
+    }
+
+    public void saveData() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        for (int i = 0; i<logic.getMuligeOrd().size(); i++) {
+
+            System.out.println(logic.getMuligeOrd().get(i));
+            editor.putString("amount", String.valueOf(i));
+            editor.putString(String.valueOf(i), logic.getMuligeOrd().get(i));
+            editor.apply();
+
+        }
     }
 
 

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.example.simon.galgeleg.MainMenu.logic;
+import static com.example.simon.galgeleg.Main_Activity.logic;
 
 /**
  * Created by Simon on 20-10-2017.

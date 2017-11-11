@@ -17,7 +17,7 @@ import com.example.simon.galgeleg.Logic.Galgelogik;
 public class MainMenu extends Fragment implements View.OnClickListener {
 
     private Button helpBut, settingsBut, gameBut;
-    static Galgelogik logic = new Galgelogik();
+  //  static Galgelogik logic = new Galgelogik();
 
    @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {

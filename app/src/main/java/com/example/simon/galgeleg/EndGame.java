@@ -3,6 +3,7 @@ package com.example.simon.galgeleg;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.example.simon.galgeleg.MainMenu.logic;
+import static com.example.simon.galgeleg.Main_Activity.logic;
 
 /**
  * Created by Simon on 06-11-2017.
@@ -66,6 +67,10 @@ public class EndGame extends Fragment implements View.OnClickListener {
             getFragmentManager().popBackStackImmediate();
 
         } else if (v == endBut2) {
+
+            FragmentManager fm = getFragmentManager();
+            fm.popBackStackImmediate();
+            fm.popBackStackImmediate();
 
         }
 

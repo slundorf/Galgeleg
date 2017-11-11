@@ -14,14 +14,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.simon.galgeleg.Logic.Galgelogik;
 
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
-import static com.example.simon.galgeleg.MainMenu.logic;
+import static com.example.simon.galgeleg.Main_Activity.logic;
 
 /**
  * Created by Simon on 22-10-2017.
