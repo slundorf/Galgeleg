@@ -94,11 +94,23 @@ public class Galgelogik {
 
   public void addHighscore(String name) {
 
-    HashMap<String,String> score = new HashMap<String,String>();
-    score.put("word", ordet);
-    score.put("wrong", String.valueOf(guesses));
-    score.put("player", name);
-    highscorelist.add(score);
+    boolean replace = true;
+
+    for (int i = 0; i<highscorelist.size(); i++) {
+      if (highscorelist.get(i).get("word").equals(ordet)) {
+        highscorelist.get(i).replace("wrong", String.valueOf(guesses));
+        highscorelist.get(i).replace("player", name);
+        replace = false;
+      }
+    }
+
+    if (replace) {
+      HashMap<String, String> score = new HashMap<String, String>();
+      score.put("word", ordet);
+      score.put("wrong", String.valueOf(guesses));
+      score.put("player", name);
+      highscorelist.add(score);
+    }
 
   }
 

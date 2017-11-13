@@ -26,6 +26,7 @@ public class EndGame extends Fragment implements View.OnClickListener {
     private TextView endtv, endtv2;
     private EditText endet;
     private ImageView endiv;
+    private boolean record;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,32 +107,27 @@ public class EndGame extends Fragment implements View.OnClickListener {
 
             for (int i = 0; i < logic.getHighscoreList().size(); i++) {
 
+                record = true;
+
                 if (logic.getHighscoreList().get(i).get("word").equals(logic.getOrdet())) {
 
-                    System.out.println("TEST");
-                    System.out.println(logic.getGuesses());
-                    System.out.println(logic.getHighscoreList().get(i).get("wrong"));
+                    record = Integer.valueOf(logic.getHighscoreList().get(i).get("wrong")) > logic.getGuesses();
+                }
+            }
 
-                    if (logic.getGuesses() < Integer.valueOf(logic.getHighscoreList().get(i).get("wrong"))) {
+                if (record) {
 
-                        System.out.println("FUCK");
-                        newHighscore();
+                    newHighscore();
 
-                    } else {
-
-                        endBut3.setVisibility(View.GONE);
-                        endet.setVisibility(View.GONE);
-
-                    }
-
-                } else {
+                } else if (!record) {
 
                     endGame();
 
                 }
+
             }
         }
-    }
+
 
     public void newHighscore() {
 
@@ -140,10 +136,12 @@ public class EndGame extends Fragment implements View.OnClickListener {
         endBut2.setVisibility(View.GONE);
         endBut3.setVisibility(View.VISIBLE);
         endet.setVisibility(View.VISIBLE);
+        record = false;
 
     }
 
     public void endGame() {
+        record = false;
         endet.setVisibility(View.GONE);
         endBut3.setVisibility(View.GONE);
         endBut.setVisibility(View.VISIBLE);
