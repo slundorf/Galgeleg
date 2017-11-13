@@ -1,7 +1,5 @@
 package com.example.simon.galgeleg;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,14 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import static com.example.simon.galgeleg.Main_Activity.logic;
 
 /**
@@ -34,6 +28,7 @@ public class WordList extends Fragment implements View.OnClickListener, AdapterV
     private Button delBut1, delBut2;
     private TextView deltv;
     private int pos;
+    private String state;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +40,18 @@ public class WordList extends Fragment implements View.OnClickListener, AdapterV
         delBut1 = (Button) source.findViewById(R.id.delBut1);
         delBut2 = (Button) source.findViewById(R.id.delBut2);
 
-        deltv.setText("Click on a word you wish to delete:");
+        state = getArguments().getString("state", String.valueOf(0));
+        System.out.println(state);
+
+        if (Objects.equals(state, "list")) {
+
+            deltv.setText("Choose word you wish to play with");
+
+        } else {
+
+            deltv.setText("Click on a word you wish to delete:");
+
+        }
 
         makeAdapter();
 
@@ -61,11 +67,28 @@ public class WordList extends Fragment implements View.OnClickListener, AdapterV
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         pos = position;
-        lv.setVisibility(View.GONE);
-        delBut1.setVisibility(View.VISIBLE);
-        delBut2.setVisibility(View.VISIBLE);
-        deltv.setText("Are you sure you wish to delete " + possibleWords.get(position).toString() + "?");
 
+        if (Objects.equals(state, "list")) {
+
+            Game fragment = new Game();
+            Bundle args = new Bundle();
+            args.putString("word", possibleWords.get(pos));
+            fragment.setArguments(args);
+
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                    .replace(R.id.fragments, fragment)
+                    .addToBackStack(null)
+                    .commit();
+
+        } else {
+
+            lv.setVisibility(View.GONE);
+            delBut1.setVisibility(View.VISIBLE);
+            delBut2.setVisibility(View.VISIBLE);
+            deltv.setText("Are you sure you wish to delete " + possibleWords.get(pos).toString() + "?");
+
+        }
     }
 
     @Override

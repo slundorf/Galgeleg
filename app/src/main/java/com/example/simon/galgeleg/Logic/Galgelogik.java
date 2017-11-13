@@ -1,19 +1,19 @@
 package com.example.simon.galgeleg.Logic;
 
 import android.content.Context;
-import android.graphics.Path;
-import android.os.Environment;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -27,7 +27,7 @@ public class Galgelogik {
   private boolean sidsteBogstavVarKorrekt;
   private boolean spilletErVundet;
   private boolean spilletErTabt;
-
+  private ArrayList<HashMap<String,String>> highscorelist = new ArrayList<HashMap<String,String>>();
 
   public ArrayList<String> getBrugteBogstaver() {
     return brugteBogstaver;
@@ -83,6 +83,25 @@ public class Galgelogik {
 
   }
 
+  public void setHighscorelist(ArrayList<HashMap<String,String>> hs) {
+
+    highscorelist = hs;
+
+  }
+
+  public void addHighscore(String name) {
+
+    HashMap<String,String> score = new HashMap<String,String>();
+    score.put("word", ordet);
+    score.put("wrong", String.valueOf(guesses));
+    score.put("player", name);
+    highscorelist.add(score);
+
+  }
+
+  public ArrayList<HashMap<String,String>> getHighscoreList() {
+    return highscorelist;
+  }
 
   public Galgelogik() {
     guesses = 0;
@@ -233,21 +252,16 @@ public class Galgelogik {
     nulstil();
   }
 
-  public void saveWords(FileOutputStream root) {
-    try {
-        File filepath = new File(root.toString(), "detteerentest.txt");
-        System.out.println(root.toString());
-        FileWriter writer = new FileWriter(filepath);
-        for (int i = 0; i < muligeOrd.size(); i++) {
-            writer.append(muligeOrd.get(i).toString());
-        }
-        writer.flush();
-        writer.close();
+  public void saveData(Context ctx) {
+    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
+    SharedPreferences.Editor editor = preferences.edit();
+    for (int i = 0; i<muligeOrd.size(); i++) {
 
-        } catch (IOException e) {
-        e.printStackTrace();
-  }
+      editor.putString("amount", String.valueOf(i));
+      editor.putString(String.valueOf(i), muligeOrd.get(i));
+      editor.apply();
 
+    }
   }
 
 }

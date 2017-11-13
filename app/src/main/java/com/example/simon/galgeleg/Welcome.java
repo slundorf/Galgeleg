@@ -38,10 +38,12 @@ public class Welcome extends Fragment implements Runnable {
 
     public void run() {
 
-        Fragment fragment = new MainMenu();
+        MainMenu fragment = new MainMenu();
+
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.fragments, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

@@ -1,16 +1,18 @@
 package com.example.simon.galgeleg;
 
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
+import java.util.HashMap;
 
 import com.example.simon.galgeleg.Logic.Galgelogik;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by Simon on 20-10-2017.
@@ -30,6 +32,7 @@ public class Main_Activity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Fragment fragment = new Welcome();
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragments, fragment)
                     .commit();
@@ -38,7 +41,7 @@ public class Main_Activity extends AppCompatActivity {
         setTitle("Hangman");
      //   Drawable draw = getResources().getDrawable(R.drawable.hangmanlogo);
     //    getSupportActionBar().setBackgroundDrawable(draw);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+          getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -52,15 +55,16 @@ public class Main_Activity extends AppCompatActivity {
     public void loadData() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String amount = preferences.getString("amount", "");
-        System.out.println(amount);
-        int count = Integer.valueOf(amount);
 
-        for (int i = 0; i<=count; i++) {
+        if (!Objects.equals(amount, "")) {
+            int count = Integer.valueOf(amount);
 
-            String name = preferences.getString(String.valueOf(i), "");
-            logic.tilføjOrd(name);
-            System.out.println(name);
+            for (int i = 0; i <= count; i++) {
 
+                String word = preferences.getString(String.valueOf(i), "");
+                logic.tilføjOrd(word);
+
+            }
         }
 
     }

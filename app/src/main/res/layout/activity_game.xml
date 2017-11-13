@@ -8,13 +8,14 @@
         android:id="@+id/gametv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="visible" />
 
     <ImageView
         android:id="@+id/gameiv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:srcCompat="@drawable/galge" />
 
     <EditText
@@ -24,37 +25,13 @@
         android:ems="10"
         android:hint="Write your letter here."
         android:inputType="textPersonName"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/guessBut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guess"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/addBut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/randBut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/listBut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
-    <ListView
-        android:id="@+id/gameList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </LinearLayout>

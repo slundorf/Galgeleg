@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/addWordBut"
+    <EditText
+        android:id="@+id/writeet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Write your own word" />
+        android:ems="10"
+        android:hint="Write your word here"
+        android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/webBut"
+        android:id="@+id/writeBut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add words from website" />
-
+        android:text="Enter" />
 </LinearLayout>

@@ -7,16 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by Simon on 20-10-2017.
  */
 
 public class Settings extends Fragment implements View.OnClickListener {
-    private Button wordBut;
-    private Button wordBut2;
+    private Button wordBut, wordBut2, scoreBut;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,9 +23,11 @@ public class Settings extends Fragment implements View.OnClickListener {
 
         wordBut = (Button) source.findViewById(R.id.wordBut);
         wordBut2 = (Button) source.findViewById(R.id.wordBut2);
+        scoreBut = (Button) source.findViewById(R.id.scoreBut);
 
         wordBut.setOnClickListener(this);
         wordBut2.setOnClickListener(this);
+        scoreBut.setOnClickListener(this);
 
         return source;
 
@@ -38,9 +37,14 @@ public class Settings extends Fragment implements View.OnClickListener {
 
         if (v == wordBut) {
 
+            Bundle args = new Bundle();
+            args.putString("state", "noList");
+            WordList fragment = new WordList();
+            fragment.setArguments(args);
+
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                    .replace(R.id.fragments, new WordList())
+                    .replace(R.id.fragments, fragment)
                     .addToBackStack(null)
                     .commit();
 
@@ -49,6 +53,14 @@ public class Settings extends Fragment implements View.OnClickListener {
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                     .replace(R.id.fragments, new AddWords())
+                    .addToBackStack(null)
+                    .commit();
+
+        } else if (v == scoreBut) {
+
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                    .replace(R.id.fragments, new HighScore())
                     .addToBackStack(null)
                     .commit();
 

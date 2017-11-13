@@ -3,25 +3,22 @@ package com.example.simon.galgeleg;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.example.simon.galgeleg.Logic.Galgelogik;
 
 public class MainMenu extends Fragment implements View.OnClickListener {
 
     private Button helpBut, settingsBut, gameBut;
-  //  static Galgelogik logic = new Galgelogik();
 
-   @Override
-    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-        View source = i.inflate(R.layout.activity_mainmenu, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("StartGame", "the fragment was shown!!");
+
+        View source = inflater.inflate(R.layout.activity_mainmenu, container, false);
 
         gameBut = (Button) source.findViewById(R.id.button);
         gameBut.setText("Play Hangman");
@@ -37,14 +34,16 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         helpBut.setOnClickListener(this);
 
         return source;
+
     }
 
     public void onClick(View v) {
         if (v == gameBut) {
 
-          Game fragment = new Game();
-          Bundle arguments = new Bundle();
-          fragment.setArguments(arguments);
+          StartGame fragment = new StartGame();
+          Bundle args = new Bundle();
+          args.putString("state","");
+          fragment.setArguments(args);
 
           getFragmentManager().beginTransaction()
                   .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
