@@ -71,7 +71,7 @@ public class WriteWord extends Fragment implements View.OnClickListener {
                         try {
                             while (true) {
                                 logic.hentOrdFraHjemmeside(word);
-                                logic.saveData(getContext());
+                                logic.saveWords(getContext());
                                 return;
                             }
                         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class WriteWord extends Fragment implements View.OnClickListener {
                     }
 
                     logic.tilføjOrd(word);
-                    logic.saveData(getContext());
+                    logic.saveWords(getContext());
                     FragmentManager fm = getFragmentManager();
                     fm.popBackStackImmediate();
 

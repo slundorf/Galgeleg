@@ -5,14 +5,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -83,9 +82,13 @@ public class Galgelogik {
 
   }
 
-  public void setHighscorelist(ArrayList<HashMap<String,String>> hs) {
+  public void setHighscorelist(String word, String wrong, String player) {
 
-    highscorelist = hs;
+    HashMap<String,String> score = new HashMap<String,String>();
+    score.put("word", word);
+    score.put("wrong", wrong);
+    score.put("player", player);
+    highscorelist.add(score);
 
   }
 
@@ -100,6 +103,13 @@ public class Galgelogik {
   }
 
   public ArrayList<HashMap<String,String>> getHighscoreList() {
+
+    Collections.sort(highscorelist, new Comparator<HashMap<String,String>>() {
+      public int compare(HashMap<String, String> map1, HashMap<String, String> map2) {
+        return map1.get("word").compareTo(map2.get("word"));
+      }
+    });
+
     return highscorelist;
   }
 
@@ -252,13 +262,31 @@ public class Galgelogik {
     nulstil();
   }
 
-  public void saveData(Context ctx) {
+  public void saveWords(Context ctx) {
     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
     SharedPreferences.Editor editor = preferences.edit();
+
+    // Runs through the entire word list
     for (int i = 0; i<muligeOrd.size(); i++) {
 
-      editor.putString("amount", String.valueOf(i));
-      editor.putString(String.valueOf(i), muligeOrd.get(i));
+      editor.putString("amountw", String.valueOf(i)); // Saves the amount of entries on the word list
+      editor.putString("word" + String.valueOf(i), muligeOrd.get(i)); // Saves each entry with keys based on their position on the list
+      editor.apply();
+
+    }
+  }
+
+  public void saveHighScore(Context ctx) {
+    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
+    SharedPreferences.Editor editor = preferences.edit();
+
+    // Runs through the entire high score list
+    for (int i = 0; i<highscorelist.size(); i++) {
+
+      editor.putString("amounths", String.valueOf(i)); // Saves the amount of entries to the high score list
+      editor.putString("word" + String.valueOf(i), highscorelist.get(i).get("word")); // Saves each entry of word with a key based on its position on the list
+      editor.putString("wrong" + String.valueOf(i), highscorelist.get(i).get("wrong")); // Saves each entry of wrong with a key based on its position on the list
+      editor.putString("player" + String.valueOf(i), highscorelist.get(i).get("player")); // Saves each entry of player with a key based on its position on the list
       editor.apply();
 
     }

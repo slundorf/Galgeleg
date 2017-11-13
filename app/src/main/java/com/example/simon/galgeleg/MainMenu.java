@@ -16,7 +16,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("StartGame", "the fragment was shown!!");
+        Log.d("MainMenu", "the fragment was shown!!");
 
         View source = inflater.inflate(R.layout.activity_mainmenu, container, false);
 

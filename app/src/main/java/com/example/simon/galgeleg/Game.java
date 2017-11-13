@@ -62,7 +62,7 @@ public class Game extends Fragment implements View.OnClickListener {
 
         if (v == guessBut) {
 
-            String letter = et.getText().toString();
+            String letter = et.getText().toString().toLowerCase();
             if (letter.length() != 1 && letter.length() != logic.getOrdet().length()) {
                 et.setError("Only write ONE letter or guess the WHOLE word");
                 return;
@@ -98,16 +98,12 @@ public class Game extends Fragment implements View.OnClickListener {
 
         if (logic.erSpilletVundet()) {
 
-            gametv.append("\nYou win!");
-
-            endGame();
+            endGame("win");
 
         }
         if (logic.erSpilletTabt()) {
 
-            gametv.setText("You have lost. The word was : " + logic.getOrdet());
-
-            endGame();
+            endGame("loss");
         }
     }
 
@@ -132,13 +128,14 @@ public class Game extends Fragment implements View.OnClickListener {
 
     }
 
-    private void endGame() {
+    private void endGame(String condition) {
 
         et.setText("");
 
         EndGame fragment = new EndGame();
-        Bundle arguments = new Bundle();
-        fragment.setArguments(arguments);
+        Bundle args = new Bundle();
+        args.putString("condition", condition);
+        fragment.setArguments(args);
 
         getFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.fragments, fragment)

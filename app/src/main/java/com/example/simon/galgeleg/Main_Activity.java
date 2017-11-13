@@ -10,6 +10,9 @@ import android.view.Window;
 import java.util.HashMap;
 
 import com.example.simon.galgeleg.Logic.Galgelogik;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -39,8 +42,6 @@ public class Main_Activity extends AppCompatActivity {
         }
 
         setTitle("Hangman");
-     //   Drawable draw = getResources().getDrawable(R.drawable.hangmanlogo);
-    //    getSupportActionBar().setBackgroundDrawable(draw);
           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -53,16 +54,31 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void loadData() {
+        // Function that loads the data stored in the SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String amount = preferences.getString("amount", "");
 
-        if (!Objects.equals(amount, "")) {
-            int count = Integer.valueOf(amount);
+        String amountw = preferences.getString("amountw", ""); // Gets the amount of words saved
+        String amounths = preferences.getString("amounths", ""); // Gets the amount of high scores saved
 
-            for (int i = 0; i <= count; i++) {
+        if (!Objects.equals(amountw, "")) { // Only triggers if there are saved words
+            int count = Integer.valueOf(amountw); // Parses the string amount to an int
 
-                String word = preferences.getString(String.valueOf(i), "");
+            for (int i = 0; i <= count; i++) { // For loop that uses the amount of words saved to run through all the keys the words are saved as, adding them to the list in the logic
+
+                String word = preferences.getString("word" + String.valueOf(i), "");
                 logic.tilføjOrd(word);
+
+            }
+        }
+        if (!Objects.equals(amounths, "")) { // Only triggers if there are saved high scores.
+            int count = Integer.valueOf(amounths); // Parses the string amount to an int
+
+            for (int i = 0; i <= count; i++) { // For loop that uses the amount of high scores saved to run through all the keys the high scores are saved as, adding them to the list in the logic
+
+                String word = preferences.getString("word" + String.valueOf(i), "");
+                String wrong = preferences.getString("wrong" + String.valueOf(i), "");
+                String player = preferences.getString("player" + String.valueOf(i), "");
+                logic.setHighscorelist(word, wrong, player);
 
             }
         }

@@ -1,8 +1,6 @@
 package com.example.simon.galgeleg;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -13,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 import static com.example.simon.galgeleg.Main_Activity.logic;
 
@@ -44,15 +44,19 @@ public class EndGame extends Fragment implements View.OnClickListener {
         endet.setHint("Enter your name here");
         endiv.setImageResource(Game.imageIDs[logic.getAntalForkerteBogstaver()]);
 
-        if (logic.erSidsteBogstavKorrekt()) {
+        String condition = getArguments().getString("condition", String.valueOf(0));
+
+        if (Objects.equals(condition, "win")) {
 
             endtv.setText("You won the game! You used " + logic.getGuesses() + " guesses to guess the word: " + logic.getOrdet() + "!");
 
             checkHighscore();
 
-        } else if (!logic.erSidsteBogstavKorrekt()) {
+        } else if (Objects.equals(condition, "loss")) {
 
             endtv.setText("You lost the game! You couldn't guess the word: " + logic.getOrdet() + " in time!");
+
+            endGame();
 
         }
 
@@ -69,34 +73,26 @@ public class EndGame extends Fragment implements View.OnClickListener {
 
         if (v == endBut) {
 
-            getFragmentManager().popBackStackImmediate();
+            FragmentManager fm = getFragmentManager();
+            fm.popBackStackImmediate();
+            fm.popBackStackImmediate();
+            fm.popBackStackImmediate();
 
         } else if (v == endBut2) {
 
             FragmentManager fm = getFragmentManager();
             fm.popBackStackImmediate();
             fm.popBackStackImmediate();
+            fm.popBackStackImmediate();
+            fm.popBackStackImmediate();
 
         } else if (v == endBut3) {
 
             logic.addHighscore(endet.getText().toString());
-            endet.setVisibility(View.GONE);
-            endBut3.setVisibility(View.GONE);
-            endBut.setVisibility(View.VISIBLE);
-            endBut2.setVisibility(View.VISIBLE);
-            endtv2.setText("Want to play again?");
+            logic.saveHighScore(getContext());
+            endGame();
 
         }
-
-    }
-
-    public void newHighscore() {
-
-        endtv2.setText("This is a new record for that word! Write your name to get on the list of highscores");
-        endBut.setVisibility(View.GONE);
-        endBut2.setVisibility(View.GONE);
-        endBut3.setVisibility(View.VISIBLE);
-        endet.setVisibility(View.VISIBLE);
 
     }
 
@@ -105,7 +101,6 @@ public class EndGame extends Fragment implements View.OnClickListener {
         if (logic.getHighscoreList().size() == 0) {
 
             newHighscore();
-         //   saveData();
 
         } else {
 
@@ -119,7 +114,6 @@ public class EndGame extends Fragment implements View.OnClickListener {
                     if (logic.getGuesses() < Integer.valueOf(logic.getHighscoreList().get(i).get("wrong"))) {
 
                         newHighscore();
-                   //     saveData();
 
                     } else {
 
@@ -131,18 +125,28 @@ public class EndGame extends Fragment implements View.OnClickListener {
                 } else {
 
                     newHighscore();
-                  //  saveData();
 
                 }
             }
         }
     }
 
-    public void saveData() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
+    public void newHighscore() {
 
-        editor.apply();
+        endtv2.setText("This is a new record for that word! Write your name to get on the list of highscores");
+        endBut.setVisibility(View.GONE);
+        endBut2.setVisibility(View.GONE);
+        endBut3.setVisibility(View.VISIBLE);
+        endet.setVisibility(View.VISIBLE);
+
+    }
+
+    public void endGame() {
+        endet.setVisibility(View.GONE);
+        endBut3.setVisibility(View.GONE);
+        endBut.setVisibility(View.VISIBLE);
+        endBut2.setVisibility(View.VISIBLE);
+        endtv2.setText("Want to play again?");
     }
 
 }
