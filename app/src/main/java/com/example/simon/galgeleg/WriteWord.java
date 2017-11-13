@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.example.simon.galgeleg.Main_Activity.logic;
 
@@ -27,6 +29,7 @@ public class WriteWord extends Fragment implements View.OnClickListener {
     Button writeBut;
     String state;
     String word;
+    String url;
     Toast download;
 
     @Override
@@ -57,11 +60,11 @@ public class WriteWord extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        word = writeet.getText().toString();
-
         if (Objects.equals(state, "web")) {
 
-            if (!URLUtil.isHttpsUrl(word)) {
+            url = writeet.getText().toString();
+
+            if (!URLUtil.isHttpsUrl(url)) {
                 writeet.setError("Please start your URL with https://");
             } else {
 
@@ -70,7 +73,7 @@ public class WriteWord extends Fragment implements View.OnClickListener {
                     public void run() {
                         try {
                             while (true) {
-                                logic.hentOrdFraHjemmeside(word);
+                                logic.hentOrdFraHjemmeside(url);
                                 logic.saveWords(getContext());
                                 return;
                             }
@@ -91,9 +94,17 @@ public class WriteWord extends Fragment implements View.OnClickListener {
 
         } else {
 
-            if (word.length() < 3) {
+            word = writeet.getText().toString().toLowerCase();
+            Pattern p = Pattern.compile("^[ A-Za-z]+$"); // Regex to only allow letters
+            Matcher m = p.matcher(word);
 
-                writeet.setError("Enter a word to continue!");
+            if (!(m.matches())) {
+
+                writeet.setError("Only use letters!");
+
+            } else if (word.length() < 3) {
+
+                writeet.setError("Enter a 3 letter word to continue!");
 
             } else if (word.length() >= 3) {
 

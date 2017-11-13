@@ -7,10 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 /**
  * Created by Simon on 13-11-2017.
@@ -44,7 +41,6 @@ public class StartGame extends Fragment implements View.OnClickListener {
 
         return source;
     }
-
 
     @Override
     public void onClick(View v) {

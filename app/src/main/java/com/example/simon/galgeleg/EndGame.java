@@ -128,7 +128,6 @@ public class EndGame extends Fragment implements View.OnClickListener {
             }
         }
 
-
     public void newHighscore() {
 
         endtv2.setText("This is a new record for that word! Write your name to get on the list of highscores");

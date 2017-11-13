@@ -7,14 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
-import java.util.HashMap;
 
 import com.example.simon.galgeleg.Logic.Galgelogik;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**

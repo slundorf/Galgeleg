@@ -50,8 +50,6 @@ public class Game extends Fragment implements View.OnClickListener {
 
         String word = getArguments().getString("word", String.valueOf(0));
 
-        System.out.println(word);
-
         startGame(word);
 
         return source;

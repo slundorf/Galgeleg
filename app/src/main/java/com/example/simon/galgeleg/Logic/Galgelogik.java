@@ -84,6 +84,8 @@ public class Galgelogik {
 
   public void setHighscorelist(String word, String wrong, String player) {
 
+    // Function used only to load high score list upon starting the app
+
     HashMap<String,String> score = new HashMap<String,String>();
     score.put("word", word);
     score.put("wrong", wrong);
@@ -94,17 +96,18 @@ public class Galgelogik {
 
   public void addHighscore(String name) {
 
-    boolean replace = true;
+    boolean replace = false;
 
+    // If a previous record for the word exists, for loop will replace amount of guesses and the player name with the new record set
     for (int i = 0; i<highscorelist.size(); i++) {
       if (highscorelist.get(i).get("word").equals(ordet)) {
         highscorelist.get(i).replace("wrong", String.valueOf(guesses));
         highscorelist.get(i).replace("player", name);
-        replace = false;
+        replace = true;
       }
     }
 
-    if (replace) {
+    if (!replace) {
       HashMap<String, String> score = new HashMap<String, String>();
       score.put("word", ordet);
       score.put("wrong", String.valueOf(guesses));
@@ -251,7 +254,6 @@ public class Galgelogik {
 
   public void hentOrdFraHjemmeside(String url) throws Exception {
     String data = hentUrl(url);
-    //System.out.println("data = " + data);
 
     data = data.substring(data.indexOf("<body")). // fjern headere
             replaceAll("<.+?>", " ").toLowerCase(). // fjern tags
@@ -267,7 +269,7 @@ public class Galgelogik {
 
     System.out.println("data = " + data);
     System.out.println("data = " + Arrays.asList(data.split("\\s+")));
- //   muligeOrd.clear();
+
     muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
     System.out.println("muligeOrd = " + muligeOrd);
