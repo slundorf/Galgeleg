@@ -110,9 +110,11 @@ public class EndGame extends Fragment implements View.OnClickListener {
 
                     System.out.println("TEST");
                     System.out.println(logic.getGuesses());
+                    System.out.println(logic.getHighscoreList().get(i).get("wrong"));
 
                     if (logic.getGuesses() < Integer.valueOf(logic.getHighscoreList().get(i).get("wrong"))) {
 
+                        System.out.println("FUCK");
                         newHighscore();
 
                     } else {
@@ -124,7 +126,7 @@ public class EndGame extends Fragment implements View.OnClickListener {
 
                 } else {
 
-                    newHighscore();
+                    endGame();
 
                 }
             }

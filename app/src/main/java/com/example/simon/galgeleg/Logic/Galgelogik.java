@@ -104,6 +104,7 @@ public class Galgelogik {
 
   public ArrayList<HashMap<String,String>> getHighscoreList() {
 
+    // Comparator that runs through and sorts the high score list alphabetically
     Collections.sort(highscorelist, new Comparator<HashMap<String,String>>() {
       public int compare(HashMap<String, String> map1, HashMap<String, String> map2) {
         return map1.get("word").compareTo(map2.get("word"));
@@ -135,7 +136,6 @@ public class Galgelogik {
     ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
     opdaterSynligtOrd();
   }
-
 
   public void opdaterSynligtOrd() {
     synligtOrd = "";
