@@ -133,6 +133,8 @@ public class Game extends Fragment implements View.OnClickListener {
         EndGame fragment = new EndGame();
         Bundle args = new Bundle();
         args.putString("condition", condition);
+        args.putString("word", logic.getOrdet());
+        args.putString("guesses", String.valueOf(logic.getGuesses()));
         fragment.setArguments(args);
 
         getFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)

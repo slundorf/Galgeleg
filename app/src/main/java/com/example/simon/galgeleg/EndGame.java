@@ -46,16 +46,18 @@ public class EndGame extends Fragment implements View.OnClickListener {
         endiv.setImageResource(Game.imageIDs[logic.getAntalForkerteBogstaver()]);
 
         String condition = getArguments().getString("condition", String.valueOf(0));
+        String word = getArguments().getString("word", String.valueOf(0));
+        String guesses = getArguments().getString("gusses", String.valueOf(0));
 
         if (Objects.equals(condition, "win")) {
 
-            endtv.setText("You won the game! You used " + logic.getGuesses() + " guesses to guess the word: " + logic.getOrdet() + "!");
+            endtv.setText("You won the game! You used " + guesses + " guesses to guess the word: " + word + "!");
 
             checkHighscore();
 
         } else if (Objects.equals(condition, "loss")) {
 
-            endtv.setText("You lost the game! You couldn't guess the word: " + logic.getOrdet() + " in time!");
+            endtv.setText("You lost the game! You couldn't guess the word: " + word + " in time!");
 
             endGame();
 

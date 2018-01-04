@@ -27,17 +27,6 @@
         tools:layout_editor_absoluteY="59dp" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:layout_alignStart="@+id/button3"
-        android:layout_marginBottom="37dp"
-        android:text="Settings"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="139dp" />
-
-    <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

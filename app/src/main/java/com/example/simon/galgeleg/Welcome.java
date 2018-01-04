@@ -3,6 +3,8 @@ package com.example.simon.galgeleg;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,10 +41,9 @@ public class Welcome extends Fragment implements Runnable {
 
         MainMenu fragment = new MainMenu();
 
-        getFragmentManager().beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        getFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.fragments, fragment)
-                .addToBackStack(null)
                 .commit();
+
     }
 }

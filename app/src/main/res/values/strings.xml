@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Hangman</string>
+    <string name="app_name">s154008 Hangman</string>
+    <string name="yes_key">Yes</string>
+    <string name="no_key">No</string>
+    <string name="enter_key">Enter</string>
+    <string name="guess_key">Guess</string>
+    <string name="play_key">Play</string>
+    <string name="settings_key">Settings</string>
+    <string name="help_key">Help</string>
 </resources>
